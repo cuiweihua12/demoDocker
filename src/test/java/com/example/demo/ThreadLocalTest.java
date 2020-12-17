@@ -22,4 +22,5 @@ public class ThreadLocalTest {
             System.out.println(Thread.currentThread().getName()+"：的local值为："+local.get());
         }).start());
     }
+
 }
