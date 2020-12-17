@@ -6,6 +6,8 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,11 +44,13 @@ public class RQController {
     // LOGO高度
     private static final int HEIGHT = 60;
 
+    private Logger logger = LoggerFactory.getLogger(RQController.class);
+
 
     @GetMapping
     public void rqCode(HttpServletResponse response) throws Exception{
         Map<String, Object> map = new HashMap<>();
-        map.put("gdbmId",1);
+        map.put("cuiweihua","崔蔚华");
         map.put("materEqpmTypeCde",0);
 
         String content = JSON.toJSONString(map);
@@ -66,6 +70,7 @@ public class RQController {
         }
         ServletOutputStream os = response.getOutputStream();
         ImageIO.write(image, "PNG",os);
+        logger.info("success");
         os.flush();
         os.close();
     }
@@ -77,7 +82,7 @@ public class RQController {
         Image src = ImageIO.read(file.getInputStream());
 
         Map<String, Object> map = new HashMap<>();
-        map.put("gdbmId",1);
+        map.put("cuiweihua","崔蔚华");
         map.put("materEqpmTypeCde",0);
 
         String content = JSON.toJSONString(map);
@@ -101,6 +106,7 @@ public class RQController {
 
         ServletOutputStream os = response.getOutputStream();
         ImageIO.write(image, "PNG",os);
+        logger.info("success");
         os.flush();
         os.close();
     }
